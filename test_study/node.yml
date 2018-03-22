@@ -1,0 +1,25 @@
+- hosts: xd1
+  remote_user: root
+  roles:
+#   - {role: tengine}
+   - {role: lvs_node}
+#   - {role: base}
+#   - {role: jdk}
+#   - {role: ssh}
+#   - {role: redis}
+#   - {role: tomcat}
+#   - {role: memcache}
+#   - {role: mysql}
+
+
+#   - {role: lvs-master}
+
+
+
+
+
+
+
+#   - {role: php} not install
+#   - {role: apache}
+#   - {role: iptables}

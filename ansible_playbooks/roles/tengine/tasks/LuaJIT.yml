@@ -1,0 +1,21 @@
+- name: Copy File
+  copy:
+    src: LuaJIT-2.0.4.tar.gz
+    dest: /usr/local/src/LuaJIT-2.0.4.tar.gz
+
+- name: Unzip LuaJIT
+  unarchive:
+    src: /usr/local/src/LuaJIT-2.0.4.tar.gz
+    dest: /usr/local/src
+    remote_src: yes
+
+- name: Install LuaJIT
+  shell: make && make install PREFIX=/usr/local/luajit && touch /usr/local/luajit/done
+  
+  args:
+    chdir: /usr/local/src/LuaJIT-2.0.4
+    creates: /usr/local/luajit/done
+
+    
+    
+

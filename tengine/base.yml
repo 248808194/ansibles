@@ -1,0 +1,5 @@
+- name: Install Tengine Base
+  yum:
+    name: httpd,lrzsz,gcc,gcc-c++,ncurses-devel,libxml2-devel,openssl-devel,curl-devel,libjpeg-devel,libpng-devel,autoconf,pcre-devel,libtool-libs,freetype-devel,gd,zlib-devel,zip,unzip,wget,crontabs,iptables,file,bison,cmake,patch,mlocate,flex,diffutils,automake,make,readline-devel,glibc-devel,glibc-static,glib2-devel,bzip2-devel,gettext-devel,libcap-devel,logrotate,ntp,libmcrypt-devel,GeoIP*	
+    state: present
+ 

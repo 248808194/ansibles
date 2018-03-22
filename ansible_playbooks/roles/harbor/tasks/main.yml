@@ -1,0 +1,79 @@
+- name: Copy File
+  copy:
+    src: harbor-online-installer-v1.4.0.tgz
+    dest: /usr/local/src/harbor-online-installer-v1.4.0.tgz
+
+- name: Unzip harbor
+  unarchive:
+    src: /usr/local/src/harbor-online-installer-v1.4.0.tgz
+    dest: /usr/local/
+    remote_src: yes
+
+
+- name: reconfig cfg ssl_cert_file
+  template: src=../files/{{item}} dest=/usr/local/harbor/{{item}}
+  with_items:
+    - harbor.cfg
+    - server.crt
+    - server.key
+  tags: config
+
+
+- name: download harbor
+  shell: cd /usr/local/harbor && sh install.sh
+
+
+
+#  yum:
+#    name: "{{item}}"
+#    state: present
+#  with_items:
+#    - yum-utils
+#    - device-mapper-persistent-data
+#    - lvm2
+#
+#
+#
+#- name: install docker ce repo
+#  shell:  yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+#
+#- name: pip & docker
+#  yum:
+#    name: "{{item}}"
+#    state: present
+#  with_items:
+#   - python-pip
+#   - docker-ce
+#
+#
+#- name: install docker-compose
+#  shell: pip install --upgrade pip && pip install docker-compose
+#
+#
+#
+#- name: startup docker
+#  service:
+#    name: docker
+#    state: started
+#    enabled: yes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# install epel
+# install docker docker-compose
+# config docker config file
+#settting docker start
+# install vmware harbor register
+

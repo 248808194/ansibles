@@ -1,0 +1,29 @@
+- name: Install EPEL Repo
+  yum:
+    name: https://mirrors.ustc.edu.cn/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    state: present
+
+
+- name: redis install
+  yum:
+    name: redis
+    state: present
+
+
+
+- name: redis config file
+  template:
+    src: redis.j2
+    dest: /etc//redis.conf
+  notify:
+    restart redis
+
+- name: start redis
+  service:
+    name: redis
+    state: started
+    enabled: yes
+
+
+
+

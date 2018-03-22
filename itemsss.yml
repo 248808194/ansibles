@@ -1,0 +1,9 @@
+- hosts: a
+  vars:
+  - php_ver: php
+  tasks:
+  - name: Install extra PHP Packages
+    yum: name={{item}} state=installed
+    with_items:
+    - '{{php_ver}}-gd'
+    - '{{php_ver}}-pdo'

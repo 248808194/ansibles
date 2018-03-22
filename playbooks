@@ -1,0 +1,9 @@
+{% for ip in ansible_all_ipv4_addresses %}
+{{ip }}
+{% endfor %}
+
+{{ ansible_processor_vcpus }}
+{{ ansible_memtotal_mb }}
+
+
+memory={{ zhoutao|default(1) }}

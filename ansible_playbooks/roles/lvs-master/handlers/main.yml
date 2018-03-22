@@ -1,0 +1,2 @@
+- name: restart lvs
+  service: name=keepalived state=restarted

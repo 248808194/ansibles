@@ -1,0 +1,20 @@
+- name: Copy File
+  copy:
+    src: /home/zhoutao/ansible-study/tengine/pcre-8.37.tar.gz
+    dest: /usr/local/src/pcre-8.37.tar.gz
+
+- name: Unzip PCRE
+  unarchive:
+    src: /usr/local/src/pcre-8.37.tar.gz
+    dest: /usr/local/src
+    remote_src: yes
+
+- name: Install PCRE
+  shell: ./configure && make && make install && touch /usr/local/src/pcre-8.37/done
+  args:
+    chdir: /usr/local/src/pcre-8.37
+    creates: /usr/local/src/pcre-8.37/done
+
+    
+    
+

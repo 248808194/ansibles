@@ -1,0 +1,37 @@
+- hosts: a
+#  vars:
+#    some_values: 111
+
+# yml种定义的变量优先于 /etc/ansible/hosts下定义的变量
+
+
+  tasks:
+    - name: if value not exists set the default value or if not match set the default values
+      shell: touch /tmp/{{ some_values | default(100) }}
+
+
+
+#如果some_values存在则touch some_value的值,这里是111,如果some_values不存在,则设置缺省值 100
+
+#优先级顺序
+#role defaults [1]
+#inventory file or script group vars [2]
+#inventory group_vars/all
+#playbook group_vars/all
+#inventory group_vars/*
+#playbook group_vars/*
+#inventory file or script host vars [2]
+#inventory host_vars/*
+#playbook host_vars/*
+#host facts
+#play vars
+#play vars_prompt
+#play vars_files
+#role vars (defined in role/vars/main.yml)
+#block vars (only for tasks in block)
+#task vars (only for the task)
+#role (and include_role) params
+#include params
+#include_vars
+#set_facts / registered vars
+#extra vars (always win precedence)

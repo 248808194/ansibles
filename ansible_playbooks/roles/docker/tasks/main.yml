@@ -1,0 +1,55 @@
+- name: Install EPEL Repo
+  yum:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+    - https://mirrors.ustc.edu.cn/epel/epel-release-latest-7.noarch.rpm
+
+
+
+- name: install docker ce repo
+  shell:  yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+- name: pip & docker
+  yum:
+    name: "{{item}}"
+    state: present
+  with_items:
+   - python-pip
+   - docker-ce
+
+
+- name: install docker-compose
+  shell: pip install --upgrade pip && pip install docker-compose
+
+
+
+- name: startup docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# install epel
+# install docker docker-compose
+# config docker config file
+#settting docker start
+# install vmware harbor register
+

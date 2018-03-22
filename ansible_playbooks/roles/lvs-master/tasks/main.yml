@@ -1,0 +1,15 @@
+- name: Install lvs
+  yum: name=keepalived state=present
+
+
+- name: copy keepalived file
+  template:
+    src: keepalived.j2
+    dest: /etc/keepalived/keepalived.conf
+  notify: restart lvs
+
+
+
+
+- name: start & enable lvs
+  service: name=keepalived state=started enabled=yes

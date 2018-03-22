@@ -1,0 +1,18 @@
+- hosts: xd2
+  tasks:
+   - name: hostvars test
+     template: src=inverster_hosts.j2  dest=/tmp/inverster_hosts.test
+
+
+#
+#[root@localhost tmp]# cat groups.test
+#   # something that applies to all xd2 servers.
+#   # something that applies to all xd2 servers.
+#   # something that applies to all xd2 servers.
+#
+#
+#   172.16.52.153
+#   172.16.52.154
+#   172.16.52.155
+
+#在组内成员中全部生效.

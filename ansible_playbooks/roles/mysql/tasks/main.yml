@@ -1,0 +1,48 @@
+- name: INSTALL mysql REPO rpm package
+  yum:
+    name: mysql57-community-release-el6-11.noarch.rpm
+    state: present
+
+
+
+- name: YUM INSTALL MYSQL57
+  yum:
+    name: '{{ item }}'
+
+  with_items:
+    - 'mysql'
+    - 'mysql-server'
+
+- name: Start MySql-Server
+  service: name=mysqld state=started enabled=true
+
+
+- name: create mysqldata
+  file:
+    path: /data/mysqldata
+    state: directory
+    recurse: yes
+    mode: 0755
+    owner: mysql
+    group: mysql
+
+- name: copy my.cnf file
+  copy:
+    src: my.cnf
+    dest: /etc/my.cnf
+  notify: restart mysqld
+
+
+- name: Change mysql root password and keep track in
+  shell: |
+    password_match=`awk '/A temporary password is generated for/ {a=$0} END{ print a }' /var/log/mysqld.log | awk '{print $(NF)}'`
+    echo $password_match
+    mysql  -uroot -p$password_match --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY  '111QQq...'; flush privileges;"
+    user=root
+    password=PassW0rd > /root/.my.cnf
+  args:
+    creates: /root/.my.cnf
+    register: change_temp_pass # if the file /root/.my.cnf is exists use register set the variables  change_temp_pass
+    notify: restart mysqld # notify system to  restart mysqld
+
+

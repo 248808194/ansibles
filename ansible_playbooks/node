@@ -1,0 +1,6 @@
+
+[node1]
+192.168.8.111  ansible_ssh_user=root ansible_ssh_port=22 host_key_checking=False ansible_ssh_pass=newbie ansible_ssh_private_key_file=/home/zhoutao/downloads/id_rsa
+
+
+

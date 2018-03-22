@@ -1,0 +1,23 @@
+ansible tags
+ansible resigter
+
+- name: Create docker registry directory
+  file: path=/docker-registry state=directory
+
+- name: Copy docker registry config
+  sudo: yes
+  copy: src={{ item.src }} dest={{ item.dest }}
+        owner=root
+        force=yes
+  with_items:
+    - { src: './files/docker-compose.yml', dest: '/docker-registry/docker-compose.yml' }
+    - { src: './files/docker-registry.conf', dest: '/etc/init/docker-registry.conf' }
+  register: file_changed
+  tags: [registry]
+
+- name: Docker-registry service is restarted
+  service:
+    name: docker-registry
+    state: restarted
+  when: file_changed|changed
+  tags: [registry]

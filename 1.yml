@@ -1,0 +1,4 @@
+- hosts: a
+  tasks:
+    - name: profile
+      shell: if ! grep "HISTTIMEFORMAT" /etc/profile >/dev/null 2>&1;then echo 'export HISTTIMEFORMAT="%F %T `whoami` "' >> /etc/profile;fi

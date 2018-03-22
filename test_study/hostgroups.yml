@@ -1,0 +1,36 @@
+- hosts: a
+  remote_user: root
+  vars_files:
+    - temp.json
+  vars:
+    domain_name: vc_kdpcxg
+    nodevars: 1
+    domainname: 2
+    testline: 3
+    dat: "{{ansible_date_time.month}}-{{ansible_date_time.day}}"
+    timef: "/root/.{{dat}}.txt"
+  tasks:
+   - set_fact:
+       test_1: 1111_set_facts
+   - name: hostvars test
+     template: src=groups.j2 dest=/tmp/group.test1
+
+   - name: test when
+     shell: touch /tmp/when-test2
+     when: " 'pc' not in domain_name "
+
+   - name: register templates
+     local_action: shell ls /media
+     register: aaa
+
+   - shell: touch /tmp/{{item}}
+     with_items: "{{ aaa.stdout_lines.replace('./','/') }}"
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,3 @@
+- include: restart.yml
+- include: reload.yml
+- include: stop.yml

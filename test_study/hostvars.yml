@@ -1,0 +1,8 @@
+- hosts: a
+  tasks:
+   - name: hostvars test
+     template: src=hostvars.test dest=/tmp/{{ansible_date_time.date}}
+
+#一台服务器可以使用另外一台服务器的变量
+# 在hostvars.tset中引用了 a主机的ip地址变量 {{hostvars.a.ansible_default_ipv4.address}}
+

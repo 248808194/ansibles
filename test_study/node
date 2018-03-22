@@ -1,0 +1,17 @@
+[xd1]
+a ansible_host=172.16.52.156  ansible_ssh_user=root ansible_ssh_port=23432 host_key_checking=False ansible_ssh_pass=newbie ansible_ssh_private_key_file=/home/zhoutao/downloads/id_rsa
+
+
+
+[xd2]
+b ansible_host=172.16.52.153 ansible_ssh_user=root ansible_ssh_port=22 host_key_checking=False ansible_ssh_pass=newbie ansible_ssh_private_key_file=/home/zhoutao/downloads/id_rsa
+c ansible_host=172.16.52.154 ansible_ssh_user=root ansible_ssh_port=22 host_key_checking=False ansible_ssh_pass=newbie ansible_ssh_private_key_file=/home/zhoutao/downloads/id_rsa
+d ansible_host=172.16.52.155 ansible_ssh_user=root ansible_ssh_port=22 host_key_checking=False ansible_ssh_pass=newbie ansible_ssh_private_key_file=/home/zhoutao/downloads/id_rsa
+
+[xd1:vars]
+nodevars = nodevarstest
+domainname = domain.example.com
+
+
+
+

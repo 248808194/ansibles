@@ -1,0 +1,6 @@
+{% if 'xd1' in group_names %}
+MASTER
+{% else %}
+SALVE
+{% endif %}
+

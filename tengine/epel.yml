@@ -1,0 +1,6 @@
+- name: Install EPEL Repo
+  yum:
+    name: https://mirrors.ustc.edu.cn/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    state: present 
+
+

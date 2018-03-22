@@ -1,0 +1,4 @@
+- name: Base INIT
+  script: initbase.sh
+  args:
+    creates: /boot/system_init.txt

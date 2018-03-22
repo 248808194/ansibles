@@ -1,0 +1,19 @@
+export PS1="\h:\w\$ "
+export PS1="\[\e[31;1m\]\u@\[\e[32;1m\]\h:\W> \[\e[0m\]"
+
+ulimit -c unlimited
+
+# User specific aliases and functions
+alias grep='grep -v grep | GREP_COLOR="1;32;40" LANG=C grep --color=auto'
+
+alias rm='rm -i --preserve-root'
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias cp='cp -i'
+alias mv='mv -i'
+alias vi='vim'
+# Source global definitions
+
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi

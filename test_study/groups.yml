@@ -1,0 +1,19 @@
+- hosts: xd2
+  tasks:
+   - name: hostvars test
+     template: src=groups.j2  dest=/tmp/groups.test
+   - debug: var=hostvars[inventory_hostname]
+
+
+#
+#[root@localhost tmp]# cat groups.test
+#   # something that applies to all xd2 servers.
+#   # something that applies to all xd2 servers.
+#   # something that applies to all xd2 servers.
+#
+#
+#   172.16.52.153
+#   172.16.52.154
+#   172.16.52.155
+
+#在组内成员中全部生效.

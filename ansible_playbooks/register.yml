@@ -1,0 +1,31 @@
+- hosts: a
+  tasks:
+    - name: command line
+      shell: echo "5"   #shell的执行结果保存在result变量下,
+      register: result
+      ignore_errors: True
+
+
+
+    - name: debug get result variable when it failed
+      debug: msg="it failed"
+      when: result| failed  #如果result 结果返回了failed 打印 it failed
+
+    - name: debug get result variable when it successful
+      debug: msg="it successful"
+      when: result|success   #如果result 结果返回了failed 打印 it failed
+
+    - name: get then result output
+      debug: msg="{{result.stdout}}" # 打印出result的输出结果
+
+    - name: when result.rc == 5 (shell command execute failed) shuld be execute ss command
+      shell: /usr/sbin/ss > /tmp/failed.txt
+      when: result.rc == 5
+
+    - name: when result.rc == 0 ( shell command execute successful ) shuld be execute ss command
+      shell: /usr/sbin/ss > /tmp/success.txt
+      when: result.rc == 0
+
+
+
+#register把执行的结果放到一个变量中在对变量进行处理

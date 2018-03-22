@@ -1,0 +1,10 @@
+- hosts: a
+  vars:
+    - testname: '123'
+  tasks:
+   - name: hostvars test
+     shell: echo 123 > /1122.txt && echo 321 > /1133.tt
+     args:
+       creates: /1133.tt
+     when: " '1323' not in testname "
+       

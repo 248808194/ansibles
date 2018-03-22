@@ -1,0 +1,45 @@
+- name: unzip tomcat gz
+  unarchive:
+    src: apache-tomcat-8.5.24.tar.gz
+    dest: /usr/local/src
+
+- name: link tomcat
+  file:
+    src: /usr/local/src/apache-tomcat-8.5.24
+    dest: /usr/local/tomcat
+    state: link
+
+- name: set TOMCAT ENV
+  lineinfile:
+    dest: /etc/profile
+    line: '{{ item }}'
+
+  with_items:
+    - 'TOMCAT_HOME=/usr/local/tomcat'
+    - 'CATALINA_HOME=/usr/local/tomcat'
+    - 'CATLINA_BASE=/usr/local/tomcat'
+    - 'export TOMCAT_HOME  CATALINA_HOME  CATALINA_BASH JAVA_HOME JRE_HOME PATH CLASSPATH'
+
+- name: add tomcat init script
+  copy:
+    src: tomcat-init-script
+    dest: /etc/init.d/tomcat
+    owner: root
+    mode: 0755
+    group: root
+
+- name: add tomcat service
+  shell: chkconfig --add tomcat && chkconfig tomcat on
+
+- name: start tomcat
+  service:
+    name: tomcat
+    state: started
+    enabled: yes
+
+
+
+
+
+
+

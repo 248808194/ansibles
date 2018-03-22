@@ -1,0 +1,19 @@
+- name: copy sshd file
+  copy:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config
+  notify: restart sshd
+
+- name: mk .ssh dir
+  shell: mkdir /root/.ssh
+  args:
+    creates: /root/.ssh
+
+- name: pub keys
+  copy:
+    src: .keys
+    dest: /root/.ssh/.keys
+    owner: root
+    mode: 0600
+    group: root
+

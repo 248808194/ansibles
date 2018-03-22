@@ -1,0 +1,10 @@
+vip: 172.16.52.152
+email: zhoutao@zhoutao.name
+keepalived_auth_pass: "s3cret"
+keepalived_router_id: "6"
+keepalived_shared_iface: "eth0"
+keepalived_shared_ip: "172.16.10.90"
+node1: 172.16.52.153
+node2: 172.16.52.154
+node3: 172.16.52.155
+keepalived_role: MASTER

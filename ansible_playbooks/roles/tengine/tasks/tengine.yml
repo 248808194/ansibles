@@ -1,0 +1,80 @@
+- name: Copy File
+  copy:
+    src: tengine-2.2.2.tar.gz
+    dest: /usr/local/src/tengine-2.2.2.tar.gz
+
+- name: Unzip tengine
+  unarchive:
+    src: /usr/local/src/tengine-2.2.2.tar.gz
+    dest: /usr/local/src
+    remote_src: yes
+
+- name: Install tengine
+  shell: ./configure --prefix=/usr/local/nginx --with-http_lua_module --with-luajit-lib=/usr/local/luajit/lib/ --with-luajit-inc=/usr/local/luajit/include/luajit-2.0/ --with-ld-opt=-Wl,-rpath,/usr/local/luajit/lib --with-pcre=/usr/local/src/pcre-8.37 --user=www --group=www --with-poll_module --with-http_stub_status_module --with-http_sub_module --with-http_ssl_module --with-http_stub_status_module --with-file-aio --with-http_dav_module --with-http_realip_module && make && make install && touch /usr/local/nginx/done
+  args:
+    chdir: /usr/local/src/tengine-2.2.2
+    creates: /usr/local/nginx/done
+
+- name: create www groups
+  group:
+    name: www
+    state: present
+
+- name: create www user
+  user:
+    name: www
+    group: www
+    shell: /sbin/nologin
+    
+- name: Add Nginx.conf file
+  template:
+    src: nginx.conf.j2
+    dest: /usr/local/nginx/conf/nginx.conf
+    backup: yes
+  notify: restart nginx
+
+
+- name: Waf Install
+  copy:
+    src: waf
+    dest: /usr/local/nginx/conf
+  notify: restart nginx
+    
+
+
+- name: create waf dir && vhost dir
+  file:
+    path:  /usr/local/nginx/logs/hack, /usr/local/nginx/conf/vhosts
+    state: directory
+    owner: root
+    group: root
+    mode: 777
+    backup: yes
+  notify: restart nginx
+  
+
+
+- name: ADD nginx-init-script
+  copy:
+    src: nginx-init-script
+    dest: /etc/init.d/nginx
+    mode: 755
+    owner: root
+    group: root
+
+- name: add nginx service
+  shell: chkconfig --add nginx
+  args:
+    creates: /etc/init.d/nginx
+
+  
+    
+    
+    
+  
+  
+  
+
+    
+    
+
