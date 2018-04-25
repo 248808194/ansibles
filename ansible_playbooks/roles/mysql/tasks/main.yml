@@ -44,5 +44,14 @@
     creates: /root/.my.cnf
     register: change_temp_pass # if the file /root/.my.cnf is exists use register set the variables  change_temp_pass
     notify: restart mysqld # notify system to  restart mysqld
+- name: GET TEMP DEFAULT PASSWORD
+  shell: awk '/A temporary password is generated for/{print $NF}' /var/log/mysqld.log
+  register: default_password
+
+- name: CHANGE DEFAULT PASSWORD
+  #shell: touch /tmp/'{{ default_password.stdout_lines[0] }}'
+  #shell: mysql -p'{{item}}' --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY  '111QQq...'; flush privileges;"
+  #with_items: " {{ default_password.stdout_lines }} "
+  tags: TTT
 
 
